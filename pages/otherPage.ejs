@@ -1,0 +1,55 @@
+<%- include('authHeader') %>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!-- <link rel='stylesheet' type='text/css' href="css/profile.css"> -->
+<title>Profile</title>
+<div class="container" id='posts2'>
+      <h3> {{user.name}} {{user.surname}}</h3>
+      <img width="100rem" v-bind:src="user.photo" alt="">
+
+      <div class="row" id="posts2" >
+        <hr>
+        <div class="position-static">
+            <div class='col-md-12'>
+                <hr style ='color:black'>
+                <h3 >{{otherPosts.length}} Posts</h3>
+                <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Post</button>
+                <hr>
+                <div class="row">
+                    <div class="col-md-3" style=" border: 2px solid black"  v-for="item in otherPosts">  
+                            <img  class="img-fluid" style="width: 300px;height:150px;object-fit:cover" v-bind:src ='item.picture' v-on:click='viewPhoto(item.id)'  data-toggle="modal" data-target="#commentModal">
+                            <p style=" color: rgb(34, 69, 145); font-family: 'Calistoga', cursive;">{{item.content}}</p>
+                            <p>{{item.likes.length}} likes</p>
+                            <button v-if="!item.iHaveLiked" type='button' class="btn btn-success btn-sm" v-on:click = 'liked(item.id)'>LIKE&nbsp;&nbsp;<i class="fa fa-thumbs-o-up" style="font-size:18px" ></i></button>
+                            <button v-if="item.iHaveLiked" type='button' class="btn btn-danger btn-sm" v-on:click = 'dislike(item.id)'>DISLIKE&nbsp;&nbsp;<i class="fa fa-thumbs-o-up" style="font-size:18px" ></i></button>
+                    </div>
+                </div>
+             </div>
+          </div>
+        <hr>
+    </div>
+    <div class = 'modal' id='commentModal' style = 'z-index:1000000'>
+        <div class = 'modal-dialog'>
+            <div class = 'modal-content'>
+                <div class = 'modal-header'>
+                    <h4 class= 'modal-title m-2'>Comments</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class= 'modal-body'>
+                    <div >
+                        <input  type='text' v-model='comment' placeholder="add a comment"/>
+                        <button class= 'btn btn-success btn-sm' v-on:click= 'submitComment({comment})'>Submit</button>
+                    </div>
+                    <div v-for= 'item in comments'>
+                        <img width="50" class = 'rounded' v-bind:src= 'item.photo' alt = 'avatar'>
+                        <h5>{{item.name}}</h5>
+                        <p>{{item.description}}</p>
+                        <hr>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/otherUserPosts.js"></script>

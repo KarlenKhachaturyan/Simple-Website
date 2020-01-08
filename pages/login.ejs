@@ -1,0 +1,39 @@
+
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/css/home.css">
+<title>LogIn</title>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<div class="container-fluid">
+	 <form action="/tryLogin" method="post" class="register-form"> 
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                <p class="bg-danger text-white"><%= error %></p>
+            </div>  
+        </div>      
+      <div class="row">
+           <div class="col-md-4 col-sm-4 col-lg-4">
+              <label for="email">E-MAIL *</label>
+               <input name="login" class="form-control" type= 'email' value='ani@gmail.com'>             
+           </div>            
+      </div>
+      <div class="row">
+           <div class="col-md-4 col-sm-4 col-lg-4">
+              <label for="password">PASSWORD *</label>
+               <input name="password" class="form-control" type="password" value='123456'>             
+           </div>            
+      </div>
+  
+      <hr>
+      <div class="row">
+           <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+               <button class="btn btn-success btn-block">Login</button>           
+               <hr>
+               <p class="text-white">Don't have an account ?  <a class="btn btn-info " href="/"> Sign Up</a></p>  
+          </div>          
+      </div>    
+    </form>
+</div>

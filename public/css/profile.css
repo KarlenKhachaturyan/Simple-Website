@@ -1,0 +1,23 @@
+body{
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSu61LZXUINzwyk9z1GA1SQGeTbaK3iztEc5HMHNRnUpsbbBrag");   
+    
+    background-color: #cccccc; /* Used if the image is unavailable */
+    height: 500px; /* You must set a specified height */
+    background-position: right; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+}
+
+.row #posts{
+    background-color: rgb(250, 242, 231);
+    position: relative;
+    text-align: center;
+}
+
+.rounded {
+    float: left;
+    width: 25%;
+    padding: 2px;
+    border: 2px solid black
+}
+

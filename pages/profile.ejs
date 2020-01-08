@@ -1,0 +1,162 @@
+<%- include('authHeader') %>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+<link rel='stylesheet' type='text/css' href="css/profile.css">
+<title>Your Profile</title>
+<div class="container">
+    <div class="row m-y-2">
+        <div class="col-lg-8 push-lg-4">
+            <div class="tab-content p-b-3">
+                <div class="tab-pane active" id="profile">
+                    <h4 class="m-y-2">Your Profile</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1><%= currentUser.name %> <%= currentUser.surname %></h1>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!-- search -->
+            <div id="search">
+                <p v-if="users.length">results - {{users.length}}</p>
+                <input v-model="searchText" v-on:input="searchFriends()" type="text" class="form-control" placeholder="look for new friends...">
+                <div id="results" class="row">
+                    <div class="col-md-3 m-4" v-for="item in users">
+                        <a target="_blank" v-bind:href="item.url">
+                        <img width="100rem" v-bind:src="item.photo" alt="">
+                        <h5>{{item.name}} {{item.surname}}</h5>
+                        <button v-if="item.requestSent.length==0 && item.areWeFriends.length==0"  v-on:click="addFriend(item.id)" class="btn btn-info btn-sm">Add to Friend's</button>
+                        <button v-if="item.requestSent.length!=0" disabled class="btn btn-danger btn-sm btn-disable">Request Sent...</button>
+                        <button v-if="item.areWeFriends.length!=0" disabled class="btn btn-link btn-sm btn-disable">FRIENDS</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- changePhoto -->
+        <div class="col-lg-4 pull-lg-8 text-xs-center">
+            <% if(!currentUser.photo) { %>
+            <img src="https://cactusthemes.com/blog/wp-content/uploads/2018/01/tt_avatar_small.jpg"
+                class="m-x-auto img-fluid img-circle" alt="avatar">
+            <% }else{ %>
+            <img src="<%= currentUser.photo %>" class="m-x-auto img-fluid img-circle" alt="avatar">
+            <% } %>
+            <h6 class="m-t-2">Upload a different photo</h6>
+            <form id="myform" action="/updatePic" method="post" enctype="multipart/form-data">
+                <label class="custom-file">
+                    <input type="file" id="file" name="avatar" class="custom-file-input">
+                    <span class="custom-file-control">Choose file</span>
+                </label>
+            </form>
+
+            <hr>
+        </div>
+<!-- POst  Modal -->   
+    <div class="modal" id="myModal" style="z-index:10000;">
+            <div class="modal-dialog">
+              <div class="modal-content">
+            <div class="modal-header">
+                  <h4 class="modal-title">Add a New Post</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                    <form id="form" action="/addNewPost" enctype="multipart/form-data" method="post" >
+                        <div class="form-group">
+                                <label >File</label>
+                                <input type="file" name="avatar">
+                        </div>
+                        <div class="form-group">
+                            <label >Description</label>
+                            <textarea name="desc" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                        </div>
+                    </form>
+            </div>
+            <div class="modal-footer">
+                  <button class="btn btn-success" id="btn">Save</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+            </div>
+        </div>
+        <hr>
+<!-- posts -->
+
+<div class="row" id="posts" >
+    <hr>
+    <div class="position-static">
+        <div class='col-md-12'>
+            <hr style ='color:black'>
+            <h3 >{{posts.length}} Posts</h3>
+            <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Post</button>
+            <hr>
+                <div class="rounded m-2 "  v-for="item in posts">  
+                    <img   class="img-fluid" style="width: 300px;height:150px;object-fit:cover" v-bind:src ='item.picture' v-on:click='viewPhoto(item.id)'  data-toggle="modal" data-target="#commentModal" >
+                    <p class='m-2' style=" color: rgb(0, 0, 0); font-family: 'Calistoga', cursive; ">{{item.content}}</p>
+                    <h4 >{{item.likes.length}} Likes</h4>
+                    <button  class="btn btn-info btn-sm"  type="button" v-on:click='userLike(item.id)' data-toggle="modal" data-target="#postModal">Who Liked</button>
+                </div>
+         </div>
+      </div>
+    <hr>
+    <br>
+    <div class="modal" id="postModal" style="z-index: 10000;">
+            <div class="modal-dialog">
+              <div class="modal-content">
+          
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Modal Heading</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+          
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div v-for="item in likedUsers">
+                        
+                        <img width="50" v-bind:src="item.photo" alt="">
+                        <p>{{item.name}} {{item.surname}}</p>
+                    </div>
+                </div>
+          
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+          
+              </div>
+            </div>
+          </div>
+          <hr>
+          <br>
+    <div class = 'modal' id='commentModal' style = 'z-index:1000000'>
+        <div class = 'modal-dialog'>
+            <div class = 'modal-content'>
+                <div class = 'modal-header'>
+                    <h4 class= 'modal-title m-2'>Comments</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class= 'modal-body'>
+                    <div >
+                        <input  type='text'  v-model='comment' placeholder="add a comment"/>
+                        <button class= 'btn btn-success btn-sm' v-on:click="submitComment()">Submit</button>
+                    </div>
+                    <div class="row">
+                        <div class="row m-3" v-for= 'item in comments'>
+                            <img width="50" class = 'rounded' v-bind:src= 'item.photo' alt = 'avatar'>
+                            <h5>{{item.name}}</h5>
+                            <p>{{item.description}}</p>    
+                        </div>
+                    </div>
+                   
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/search.js"></script>
+<script src="js/posts.js"></script>

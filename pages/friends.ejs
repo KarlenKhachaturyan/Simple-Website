@@ -1,0 +1,17 @@
+<%- include('authHeader')%>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<title>Friends</title>
+  <div class= 'container m-2' id="friends">
+    <div class = 'row m-2'>
+      <div class = 'col-md-12 m-2' style= 'border: 1px solid black' v-for ="item in friends">
+        <img width = '100rem' style="margin: 5px;" v-bind:src = 'item.photo' alt =' '>
+        <hr>
+        <p>{{item.name}} {{item.surname}}</p>   
+        <button class="btn btn-success pull-right btn-sm m-2" v-on:click='sendMessage(item.id)'> Send Message</button> 
+        <button class="btn btn-info pull-right btn-sm m-2 " v-on:click='view(item.id)'> View</button>
+        <button class="btn btn-danger pull-right btn-sm m-2" v-on:click='remove(item)'>Remove</button>
+      </div>
+    </div>
+  </div>
+
+<script src='js/friends.js'></script>      

@@ -1,0 +1,68 @@
+
+
+    body, html{
+        background-color:#054b56;
+        font-family: 'Alata', sans-serif;
+        font-size: 18px;
+        background-image: url('http://www.easypei.ca/wp-content/uploads/2016/05/main-background1-1.png');
+    }
+    
+    .register-form{
+        font-size: 16px;
+       left: 50%;
+        top: 50%;
+        position: absolute;
+        -webkit-transform: translate3d(-50%, -50%, 0);
+        -moz-transform: translate3d(-50%, -50%, 0);
+        transform: translate3d(-50%, -50%, 0);
+    }
+    
+    .regbutton{    
+        width: inherit;
+        height: 55;
+        background-color:tomato;
+        border-radius: 0px;
+        font-size: 18px;
+        color:white;
+        border: none !important;
+        margin-bottom: 5px;
+    }
+    .regbutton:hover{    
+        color: white;
+        background-color:#aa422f;
+    }
+    .regbutton:active{    
+        color: white;
+        background-color:#aa422f;
+    }
+    .logbutton{    
+        width: inherit;
+      
+        background-color:rgb(220, 223, 245);
+        border-radius: 0px;
+        font-size: 18px;
+        color:white;
+        border: none !important;
+        margin-bottom: 5px;
+    }
+    .logbutton:hover{    
+        color: white;
+        background-color:darkolivegreen;
+    }
+    .logbutton:active{    
+        color: white;
+        background-color:darkolivegreen;
+    }
+    
+    
+    
+    .register-form label{
+        color: aliceblue;
+        
+    }
+    .register-form input{
+        margin-bottom: 5px;
+        width: 430px;
+        height: 40px;
+        border-radius: 0px;
+    }

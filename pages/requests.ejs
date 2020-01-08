@@ -1,0 +1,14 @@
+<%- include('authHeader') %>
+<title>Friend Requests</title>
+<div class="container m-2" style = "border: 1px solid black" id="requests">
+    <div class="row m-2 ">
+        <p v-if="!item in requests"> No Friend requests </p>
+        <div class = 'col-md-3' v-for="item in requests">
+            <img width="100rem" v-bind:src="item.photo" alt="">      
+            <p>{{item.name}} {{item.surname}}</p>     
+            <button v-on:click="accept(item.id)" class="btn btn-info btn-sm">Accept</button>
+            <button v-on:click="deny(item.id)" class="btn btn-danger btn-sm">Deny</button>
+        </div>
+    </div>
+</div>
+<script src="js/requests.js"></script>

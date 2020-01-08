@@ -1,0 +1,57 @@
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/css/home.css">
+<title>Sign Up</title>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<div class="container-fluid">
+    <!-- <h1 class="display-1 text-white">Signup</h1>
+    <p class='text-white'>It's free and always will be</p> -->
+	 <form action="/addNewUser" method="post" class="register-form"> 
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                <p class="text-danger"><%= error %></p>
+            </div>  
+        </div>      
+        <div class="row">      
+           <div class="col-md-4 col-sm-4 col-lg-4">
+              <label for="firstName">NAME *</label>
+               <input name="name" class="form-control" type="text" value="">    
+           </div>            
+      </div>
+      <div class="row">      
+        <div class="col-md-4 col-sm-4 col-lg-4">
+           <label for="firstName">SURNAME *</label>
+            <input name="surname" class="form-control" type="text" value=''>    
+        </div>            
+    </div>
+      <div class="row">
+           <div class="col-md-4 col-sm-4 col-lg-4">
+              <label for="email">E-MAIL *</label>
+               <input name="login" class="form-control" type= 'email' value=''>             
+           </div>            
+      </div>
+      <div class="row">
+           <div class="col-md-4 col-sm-4 col-lg-4">
+              <label for="password">PASSWORD *</label>
+               <input name="password" class="form-control" type="password" value=''>             
+           </div>            
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-sm-4 col-lg-4">
+           <label for="password">PASSWORD CONF *</label>
+            <input name="password_confirm" class="form-control" type="password" value = ''>             
+        </div>            
+   </div>
+      <hr>
+      <div class="row">
+           <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+           <button class="btn btn-success btn-lg btn-block">Register</button>
+           <hr>
+           <p class="text-white">Alredy have an account ?  <a class="btn btn-info " href="/login"> Login</a></p>          
+          </div>          
+      </div>    
+    </form>
+</div>

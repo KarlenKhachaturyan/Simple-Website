@@ -1,0 +1,28 @@
+<%- include('authHeader') %>
+<title>Settings</title>
+<div class = 'container m-9 p-1'>
+    <p class = 'text-danger'><%= error%></p>
+
+    <form action= '/changePass' method="POST" >
+        <div class = 'row'>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    <label for="oldPass">Old password</label>
+                    <input type= 'password' class ='form-control' name = 'oldPass' value = ''/>
+                </div>
+        </div>
+        <div class = 'row'>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    <label for="newPass">New password</label>
+                    <input type= 'password' class ='form-control' name = 'newPass' value = ''/>
+                </div>
+        </div>
+        <div class = 'row'>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    <label for="newPassConf">New Password Confirm</label>
+                    <input type= 'password' class ='form-control' name = 'newPassConf' value = ''/>
+                </div>
+        </div>
+                <button class = 'btn btn-success btn-sm m-2'> Submit </button>
+        
+    </form>
+</div>

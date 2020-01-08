@@ -1,0 +1,91 @@
+<%- include('authHeader')%>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+<!DOCTYPE html>
+<html>
+  <style>
+    .navbar-nav {
+      flex-direction: column !important;
+    }
+  </style>
+  <title>Messages</title>
+
+  <head>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
+    <script src="https://use.typekit.net/hoy3lrg.js"></script>
+    <script>
+      try {
+        Typekit.load({
+          async: true
+        });
+      } catch (e) {}
+    </script>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+    <link rel='stylesheet prefetch'
+      href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+    <link rel='stylesheet' type="text/css" href="css/messages.css" class="cp-pen-styles">
+  </head>
+
+  <body>
+    <div id="frame">
+      <div id="sidepanel">
+        <div id="profile">
+          <div class="wrap">
+            <img id="profile-img" v-bind:src="me.photo" class="online" alt="avatar" />
+            <p>{{me.name}} {{me.surname}}</p>
+          </div>
+        </div>
+        <div id="contacts">
+          <ul>
+            <li class="contact" 
+                v-bind:class="{'bg-info':item.id == currentUser}"
+                  v-for="item in chatFriends"
+                    v-on:click="startChat(item.id)">
+              <div class="wrap">
+                <img v-bind:src="item.photo" alt="" style="width:40px;height:40px;object-fit: cover;" />
+                <span class="contact-status"></span>
+                <div class="meta">
+                  <p class="name ">{{item.name}} {{item.surname}}</p>
+                    <p class="preview">
+                      <span v-if="item.lastMsg.length>0">{{item.lastMsg[0].text}}</span>
+                      <span v-if='item.newMessage==true' class="badge badge-pill badge-warning" style='color: gold'>+ new</span>
+                    </p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="content">
+        <div class="contact-profile" v-if='currentUserDetails'>
+          <img v-bind:src="currentUserDetails.photo" alt="avatar" />
+          <p>{{currentUserDetails.name}} {{currentUserDetails.surname}}</p>
+        </div>
+        <div class="messages">
+          <ul>
+            <li v-bind:class="{replies: item.from_id!=currentUser, sent:item.from_id==currentUser}"
+              v-for="item in currentMessages">
+              <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+              <p>{{item.text}} </p>
+            </li>
+          </ul>
+        </div>
+        <div class="message-input">
+          <div class="wrap">
+            <input type="text" v-model='currentMessage' placeholder="Write your message..." v-on:keydown = 'send($event)' />
+            <button class="submit" v-on:click="sendMessage()"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script src="js/messages.js"></script>
